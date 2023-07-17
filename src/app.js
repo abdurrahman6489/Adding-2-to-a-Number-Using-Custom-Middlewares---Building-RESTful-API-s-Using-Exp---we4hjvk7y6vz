@@ -10,7 +10,10 @@ app.use(express.json());
 // localhost:3000/?num=10 --> The router should return { num = 12 }
 
 function add2(req, res, next) {
-
+    const queryParams = req.query;
+    const sum = parseInt(queryParams.num) + 2;
+    req.sum = sum;
+    next();
     //Write Your Code here
     
 }
@@ -19,7 +22,7 @@ app.get('/', add2, (req, res) => {
     
     //num should be replaced by num+2 from the get request route
     const data = {
-        "num" : 5 
+        "num" : req.sum 
     };
     
     res.send(JSON.stringify(data));
